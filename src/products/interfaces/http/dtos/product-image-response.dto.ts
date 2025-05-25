@@ -16,4 +16,10 @@ export class ProductImageResponseDto {
   @ApiProperty()
   @IsInt()
   order!: number;
+
+  @ApiProperty()
+  createdAt!: Date | undefined;
+
+  @ApiProperty()
+  updatedAt!: Date | undefined;
 }

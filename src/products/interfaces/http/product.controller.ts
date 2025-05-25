@@ -29,6 +29,7 @@ import { UploadProductImageUseCase } from 'src/products/application/use-cases/in
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ProductImageRequestDto } from './dtos/product-image-request.dto';
 import { Express } from 'express';
+import { ProductImageResponseDto } from './dtos/product-image-response.dto';
 
 @ApiTags('Productos')
 @Controller('api/products')
@@ -100,7 +101,7 @@ export class ProductController {
     @Param('productId', ParseIntPipe) productId: number,
     @UploadedFile() file: Express.Multer.File,
     @Body() body: { isMain: string; order: string },
-  ) {
+  ): Promise<Result<ProductImageResponseDto>> {
     const imageRequest: ProductImageRequestDto = {
       filename: file.originalname,
       mimeType: file.mimetype,

@@ -6,6 +6,7 @@ import { Result } from 'src/shared/result/result';
 import { ProductResponseDto } from 'src/products/interfaces/http/dtos/product-response.dto';
 import { Product } from 'src/products/domain/entities/product.entity';
 import { ProductMapper } from '../mappers/product.mapper';
+import { ResponseCodes } from 'src/shared/response-code';
 
 @Injectable()
 export class CreateProductUseCaseImpl implements CreateProductUseCase {
@@ -15,6 +16,15 @@ export class CreateProductUseCaseImpl implements CreateProductUseCase {
   ) {}
 
   async execute(input: ProductRequestDto): Promise<Result<ProductResponseDto>> {
+    const productValidate = await this.productRepo.findByName(input.name);
+    if (productValidate) {
+      return Result.fail<ProductResponseDto>(
+        ResponseCodes.PRODUCT_EXIST.code,
+        ResponseCodes.PRODUCT_EXIST.message,
+        ResponseCodes.PRODUCT_EXIST.httpStatus,
+        [],
+      );
+    }
     const product = new Product(
       null,
       input.name,
@@ -29,6 +39,11 @@ export class CreateProductUseCaseImpl implements CreateProductUseCase {
     const saved = await this.productRepo.save(product);
     const response = ProductMapper.domainToInterface(saved);
 
-    return Result.ok(response, 'TRAPP_SUCC_6', 'Producto creado', 201);
+    return Result.ok(
+      response,
+      ResponseCodes.CREATE_TRANSACTION.code,
+      ResponseCodes.CREATE_TRANSACTION.message,
+      ResponseCodes.CREATE_TRANSACTION.httpStatus,
+    );
   }
 }

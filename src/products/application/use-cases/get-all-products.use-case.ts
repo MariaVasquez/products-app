@@ -4,6 +4,7 @@ import { GetAllProductsUseCase } from './interfaces/get-all-products.use-case.in
 import { Result } from 'src/shared/result/result';
 import { ProductResponseDto } from 'src/products/interfaces/http/dtos/product-response.dto';
 import { ProductMapper } from '../mappers/product.mapper';
+import { ResponseCodes } from 'src/shared/response-code';
 
 @Injectable()
 export class GetAllProductsUseCaseImpl implements GetAllProductsUseCase {
@@ -15,6 +16,11 @@ export class GetAllProductsUseCaseImpl implements GetAllProductsUseCase {
   async execute(): Promise<Result<ProductResponseDto[]>> {
     const products = await this.productRepo.findAll();
     const result = products.map((i) => ProductMapper.domainToInterface(i));
-    return Result.ok(result, 'PRODUCTS_FOUND', 'Productos encontrados', 200);
+    return Result.ok(
+      result,
+      ResponseCodes.TRANSACTION_SUCCESS.code,
+      ResponseCodes.TRANSACTION_SUCCESS.message,
+      ResponseCodes.TRANSACTION_SUCCESS.httpStatus,
+    );
   }
 }
