@@ -1,0 +1,56 @@
+{
+  "info": {
+    "name": "Products Wompi - Users",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Ana\",\n  \"lastname\": \"Garc\\u00eda\",\n  \"email\": \"ana@example.com\",\n  \"phoneNumber\": \"3214567890\",\n  \"typeDocument\": \"CC\",\n  \"documentNumber\": \"1234567890\",\n  \"address\": [\n    {\n      \"addressLine1\": \"Cra 45 #123-56\",\n      \"addressLine2\": \"Apto 101\",\n      \"city\": \"Medell\\u00edn\",\n      \"region\": \"Antioquia\",\n      \"country\": \"CO\",\n      \"postalCode\": \"050021\",\n      \"isActive\": true\n    }\n  ]\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5001/api/users",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5001",
+          "path": [
+            "api",
+            "users"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get User By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5001/api/users/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5001",
+          "path": [
+            "api",
+            "users",
+            "1"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -37,9 +37,9 @@ export class UserEntity {
   })
   addresses!: AddressEntity[];
 
-  @CreateDateColumn({ type: 'datetime' })
+  @CreateDateColumn()
   createdAt!: Date;
 
-  @UpdateDateColumn({ type: 'datetime' })
+  @UpdateDateColumn()
   updatedAt!: Date;
 }

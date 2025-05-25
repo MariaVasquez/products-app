@@ -18,16 +18,9 @@ import { typeOrmTestConfig } from './config/database.test.config';
     OrdersModule,
     PaymentsModule,
     UsersModule,
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: `./environments/.env.${process.env.NODE_ENV || 'dev'}`,
-    }),
-    TypeOrmModule.forRootAsync({
-      useFactory: () =>
-        process.env.NODE_ENV === 'test'
-          ? typeOrmTestConfig
-          : typeOrmConfigAsync,
-    }),
+    TypeOrmModule.forRootAsync(
+      process.env.NODE_ENV === 'test' ? typeOrmTestConfig : typeOrmConfigAsync,
+    ),
   ],
   controllers: [],
   providers: [],

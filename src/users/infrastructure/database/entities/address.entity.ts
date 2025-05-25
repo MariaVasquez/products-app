@@ -37,9 +37,9 @@ export class AddressEntity {
   @ManyToOne(() => UserEntity, (user) => user.addresses)
   user!: UserEntity;
 
-  @CreateDateColumn({ type: 'datetime' })
+  @CreateDateColumn()
   createdAt!: Date;
 
-  @UpdateDateColumn({ type: 'datetime' })
+  @UpdateDateColumn()
   updatedAt!: Date;
 }
