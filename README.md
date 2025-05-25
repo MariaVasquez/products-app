@@ -82,7 +82,7 @@ Próximamente se agregará un archivo `docker-compose.yml` para facilitar el des
 
 Una colección Postman está disponible para facilitar el testeo de los endpoints principales del módulo **Users**.
 
-📁 [Descargar Products-Wompi.postman_collection.json](./Products-Wompi.postman_collection.json)
+📁 [Descargar Products-Wompi.postman_collection.json](./docs/Products-Wompi.postman_collection.json)
 
 > Puedes importarla directamente en Postman con la opción **“Import” → “Archivo”**.
 
