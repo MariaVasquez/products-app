@@ -1,0 +1,16 @@
+name: products-wompi
+services:
+    postgres-db:
+      image: postgres:17.4
+      container_name: db-wompi
+      environment:
+        POSTGRES_DB: 'wompi'
+        POSTGRES_USER: 'admin'
+        POSTGRES_PASSWORD: 'admin_wompi'
+      ports:
+        - '5432:5432'
+      healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U admin -d wompi"]
+        interval: 10s
+        timeout: 5s
+        retries: 10
