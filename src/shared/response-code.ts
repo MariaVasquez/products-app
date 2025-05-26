@@ -65,4 +65,9 @@ export const ResponseCodes = {
     httpStatus: 500,
     message: 'Unexpected error deleting product image',
   },
+  ORDER_NO_ITEMS: {
+    code: 'ORDER_NO_ITEMS',
+    httpStatus: 400,
+    message: 'Cannot process order: no products were provided.',
+  },
 } as const;

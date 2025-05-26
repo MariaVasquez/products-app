@@ -37,7 +37,12 @@ export class ProductRepositoryImpl implements ProductRepository {
         return productImages;
       });
       return await this.repo.save(entity);
-    } catch {
+    } catch (error) {
+      console.error(
+        ResponseCodes.DATABASE_ERROR.message,
+        ' for create order',
+        error,
+      );
       throw new ApiException(
         ResponseCodes.DATABASE_ERROR.message,
         ResponseCodes.DATABASE_ERROR.httpStatus,

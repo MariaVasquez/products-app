@@ -76,7 +76,12 @@ export class UploadProductImageUseCaseImpl
         ResponseCodes.UPLOAD_SUCCESS.message,
         ResponseCodes.UPLOAD_SUCCESS.httpStatus,
       );
-    } catch {
+    } catch (error) {
+      console.error(
+        ResponseCodes.UNEXPECTED_ERROR.message,
+        ' for create order',
+        error,
+      );
       return Result.fail<ProductImageResponseDto>(
         ResponseCodes.UPLOAD_S3_ERROR.code,
         ResponseCodes.UPLOAD_S3_ERROR.message,
