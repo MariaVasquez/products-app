@@ -1,5 +1,5 @@
-import { ProductImageRequestDto } from 'src/products/interfaces/http/dtos/product-image-request.dto';
-import { ProductImageResponseDto } from 'src/products/interfaces/http/dtos/product-image-response.dto';
+import { ProductImageRequestDto } from 'src/products/controllers/dtos/product-image-request.dto';
+import { ProductImageResponseDto } from 'src/products/controllers/dtos/product-image-response.dto';
 import { Result } from 'src/shared/result/result';
 
 export interface UploadProductImageUseCase {

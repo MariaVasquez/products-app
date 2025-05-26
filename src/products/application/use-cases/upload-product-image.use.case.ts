@@ -1,13 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ProductImage } from 'src/products/domain/entities/product-image.entity';
+import { ProductImage } from 'src/products/domain/model/product-image.model';
 import { ProductImageRepository } from 'src/products/domain/repositories/product-image.repository';
 import { ImageStorageService } from 'src/products/domain/services/image-storage.service';
-import { ProductImageRequestDto } from 'src/products/interfaces/http/dtos/product-image-request.dto';
+import { ProductImageRequestDto } from 'src/products/controllers/dtos/product-image-request.dto';
 import { UploadProductImageUseCase } from './interfaces/upload-product-image.use.case.interface';
 import { ProductRepository } from 'src/products/domain/repositories/product.repository';
 import { Result } from 'src/shared/result/result';
 import { ResponseCodes } from 'src/shared/response-code';
-import { ProductImageResponseDto } from 'src/products/interfaces/http/dtos/product-image-response.dto';
+import { ProductImageResponseDto } from 'src/products/controllers/dtos/product-image-response.dto';
 
 @Injectable()
 export class UploadProductImageUseCaseImpl

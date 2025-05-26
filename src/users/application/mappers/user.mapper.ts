@@ -1,9 +1,9 @@
 import { Address } from '../../domain/entities/adress.entity';
 import { User } from '../../domain/entities/user.entity';
-import { UserResponseDto } from '../../interfaces/http/dto/user-response.dto';
-import { AddressResponseDto } from '../../interfaces/http/dto/address-response.dto';
-import { AddressRequestDto } from '../../interfaces/http/dto/address-request.dto';
-import { UserRequestDto } from '../../interfaces/http/dto/user-request.dto';
+import { UserResponseDto } from '../../interfaces/dto/user-response.dto';
+import { AddressResponseDto } from '../../interfaces/dto/address-response.dto';
+import { AddressRequestDto } from '../../interfaces/dto/address-request.dto';
+import { UserRequestDto } from '../../interfaces/dto/user-request.dto';
 import { UserEntity } from '../../infrastructure/database/entities/user.entity';
 import { AddressEntity } from '../../infrastructure/database/entities/address.entity';
 

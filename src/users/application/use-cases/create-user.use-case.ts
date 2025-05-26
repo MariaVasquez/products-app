@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { UserRepository } from 'src/users/domain/repositories/user.repository';
 import { CreateUserUseCase } from './interfaces/create-user.use-case.interface';
-import { UserRequestDto } from '../../interfaces/http/dto/user-request.dto';
-import { UserResponseDto } from '../../interfaces/http/dto/user-response.dto';
+import { UserRequestDto } from '../../interfaces/dto/user-request.dto';
+import { UserResponseDto } from '../../interfaces/dto/user-response.dto';
 import { UserMapper } from '../mappers/user.mapper';
 import { ConfigService } from '@nestjs/config';
 import { FieldError, Result } from '../../../shared/result/result';

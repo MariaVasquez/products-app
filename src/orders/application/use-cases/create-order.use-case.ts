@@ -1,16 +1,16 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateOrderUseCase } from './interfaces/create-order.use-case.interface';
 import { ProductQueryTypeormAdapter } from 'src/orders/infraestructure/product/typeorm/product-query-typeorm-adapter';
-import { OrderRequestDto } from 'src/orders/interfaces/http/dto/order.request.dto';
+import { OrderRequestDto } from 'src/orders/interfaces/dto/order.request.dto';
 import { UserQueryTypeormAdapter } from 'src/orders/infraestructure/user/typeorm/user-query-typeorm-adapter';
 import { Result } from 'src/shared/result/result';
-import { Order } from 'src/orders/domain/entities/order.entity';
-import { OrderResponseDto } from 'src/orders/interfaces/http/dto/order-response.dto';
+import { Order } from 'src/orders/domain/models/order.model';
+import { OrderResponseDto } from 'src/orders/interfaces/dto/order-response.dto';
 import { ResponseCodes } from 'src/shared/response-code';
-import { OrderItem } from 'src/orders/domain/entities/order-items.entity';
+import { OrderItem } from 'src/orders/domain/models/order-items.model';
 import { OrderStatus } from 'src/shared/enums/order-status.enum';
 import { OrderRepository } from 'src/orders/domain/repositories/order-repository';
-import { OrderItemResponseDto } from 'src/orders/interfaces/http/dto/order-item-response.dto';
+import { OrderItemResponseDto } from 'src/orders/interfaces/dto/order-item-response.dto';
 import { User } from 'src/users/domain/entities/user.entity';
 
 @Injectable()

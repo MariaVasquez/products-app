@@ -1,6 +1,6 @@
 import { OrderStatus } from 'src/shared/enums/order-status.enum';
-import { OrderItem } from './order-items.entity';
-import { OrderTransaction } from './order-transactions';
+import { OrderItem } from './order-items.model';
+import { OrderTransaction } from './order-transactions.model';
 
 export class Order {
   constructor(

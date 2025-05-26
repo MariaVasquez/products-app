@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ProductRepository } from '../../domain/repositories/product.repository';
 import { CreateProductUseCase } from './interfaces/create-product.use-case.interface';
-import { ProductRequestDto } from 'src/products/interfaces/http/dtos/product-request.dto';
+import { ProductRequestDto } from 'src/products/controllers/dtos/product-request.dto';
 import { Result } from 'src/shared/result/result';
-import { ProductResponseDto } from 'src/products/interfaces/http/dtos/product-response.dto';
-import { Product } from 'src/products/domain/entities/product.entity';
+import { ProductResponseDto } from 'src/products/controllers/dtos/product-response.dto';
+import { Product } from 'src/products/domain/model/product.model';
 import { ProductMapper } from '../mappers/product.mapper';
 import { ResponseCodes } from 'src/shared/response-code';
 

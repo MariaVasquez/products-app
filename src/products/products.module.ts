@@ -6,11 +6,11 @@ import { ProductImageRepositoryImpl } from './infrastructure/database/product-im
 import { CreateProductUseCaseImpl } from './application/use-cases/create-product.use-case';
 import { GetProductByIdUseCaseImpl } from './application/use-cases/get-product-by-id.use-case';
 import { GetAllProductsUseCaseImpl } from './application/use-cases/get-all-products.use-case';
-import { ProductController } from './interfaces/http/product.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { S3ImageStorageService } from './infrastructure/services/s3-image-storage.service';
 import { ConfigModule } from '@nestjs/config';
 import { UploadProductImageUseCaseImpl } from './application/use-cases/upload-product-image.use.case';
+import { ProductController } from './controllers/product.controller';
 
 @Module({
   imports: [

@@ -1,4 +1,4 @@
-import { ProductImage } from './product-image.entity';
+import { ProductImage } from './product-image.model';
 
 export class Product {
   constructor(

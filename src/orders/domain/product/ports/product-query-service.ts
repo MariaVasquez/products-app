@@ -1,4 +1,4 @@
-import { Product } from 'src/products/domain/entities/product.entity';
+import { Product } from 'src/products/domain/model/product.model';
 
 export interface ProductQueryService {
   findByIds(productIds: number[]): Promise<Product[]>;

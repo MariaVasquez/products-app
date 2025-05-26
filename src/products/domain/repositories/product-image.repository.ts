@@ -1,4 +1,4 @@
-import { ProductImage } from '../entities/product-image.entity';
+import { ProductImage } from '../model/product-image.model';
 
 export interface ProductImageRepository {
   save(image: ProductImage): Promise<ProductImage>;

@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ProductRepository } from '../../domain/repositories/product.repository';
 import { GetProductByIdUseCase } from './interfaces/get-product-by-id.use-case.interface';
 import { Result } from 'src/shared/result/result';
-import { ProductResponseDto } from 'src/products/interfaces/http/dtos/product-response.dto';
+import { ProductResponseDto } from 'src/products/controllers/dtos/product-response.dto';
 import { ProductMapper } from '../mappers/product.mapper';
 import { ResponseCodes } from 'src/shared/response-code';
 

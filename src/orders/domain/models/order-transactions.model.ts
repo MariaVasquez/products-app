@@ -9,7 +9,8 @@ export class OrderTransaction {
     public readonly amount: number,
     public readonly currency: string,
     public readonly paymentMethod: string,
-    public readonly createdAt: Date,
-    public readonly updatedAt: Date,
+    public readonly orderId?: number,
+    public readonly createdAt?: Date,
+    public readonly updatedAt?: Date,
   ) {}
 }

@@ -2,7 +2,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ProductEntity } from './entities/product.entity';
 import { ProductRepository } from '../../domain/repositories/product.repository';
-import { Product } from '../../domain/entities/product.entity';
+import { Product } from '../../domain/model/product.model';
 import { Injectable } from '@nestjs/common';
 import { ProductImageEntity } from './entities/product-images.entity';
 import { ProductMapper } from 'src/products/application/mappers/product.mapper';

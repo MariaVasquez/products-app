@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ProductImageRepository } from '../../domain/repositories/product-image.repository';
 import { ProductImageEntity } from './entities/product-images.entity';
-import { ProductImage } from 'src/products/domain/entities/product-image.entity';
+import { ProductImage } from 'src/products/domain/model/product-image.model';
 import { ProductEntity } from './entities/product.entity';
 
 @Injectable()

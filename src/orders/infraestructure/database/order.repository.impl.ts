@@ -3,7 +3,7 @@ import { OrdersEntity } from './entities/orders.entity';
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { OrderRepository } from 'src/orders/domain/repositories/order-repository';
-import { Order } from 'src/orders/domain/entities/order.entity';
+import { Order } from 'src/orders/domain/models/order.model';
 import { OrderItemEntity } from './entities/order-items.entity';
 import { OrderTransactionEntity } from './entities/order-transactions';
 import { ApiException } from 'src/shared/exceptions/ApiException';

@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { UserRepository } from 'src/users/domain/repositories/user.repository';
 import { GetUserByIdUseCase } from './interfaces/get-user-by-id.use-case.interface';
 import { Result } from '../../../shared/result/result';
-import { UserResponseDto } from 'src/users/interfaces/http/dto/user-response.dto';
+import { UserResponseDto } from 'src/users/interfaces/dto/user-response.dto';
 import { ResponseCodes } from '../../../shared/response-code';
 import { UserMapper } from '../mappers/user.mapper';
 

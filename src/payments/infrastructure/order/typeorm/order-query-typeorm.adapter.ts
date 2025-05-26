@@ -1,10 +1,26 @@
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { OrderItem } from 'src/orders/domain/models/order-items.model';
 import { OrderTransaction } from 'src/orders/domain/models/order-transactions.model';
 import { Order } from 'src/orders/domain/models/order.model';
 import { OrdersEntity } from 'src/orders/infraestructure/database/entities/orders.entity';
+import { OrderQueryService } from 'src/payments/domain/order/ports/order-query-service';
+import { Repository } from 'typeorm';
 
-export class OrderMapper {
-  static toDomain(entity: OrdersEntity): Order {
+@Injectable()
+export class OrderQueryTypeormAdapter implements OrderQueryService {
+  constructor(
+    @InjectRepository(OrdersEntity)
+    private readonly repo: Repository<OrdersEntity>,
+  ) {}
+
+  async findById(id: number): Promise<Order | null> {
+    const entity = await this.repo.findOne({
+      where: { id },
+      relations: ['items', 'transactions'],
+    });
+    if (!entity) return null;
+
     const items = entity.items.map(
       (i) =>
         new OrderItem(

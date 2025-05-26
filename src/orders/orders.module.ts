@@ -9,7 +9,7 @@ import { OrdersEntity } from './infraestructure/database/entities/orders.entity'
 import { OrderItemEntity } from './infraestructure/database/entities/order-items.entity';
 import { OrderTransactionEntity } from './infraestructure/database/entities/order-transactions';
 import { OrderRepositoryImpl } from './infraestructure/database/order.repository.impl';
-import { OrderController } from './interfaces/http/order.controller';
+import { OrderController } from './interfaces/order.controller';
 
 @Module({
   imports: [

@@ -19,17 +19,17 @@ import {
   ApiParam,
   ApiBody,
 } from '@nestjs/swagger';
-import { CreateProductUseCase } from '../../application/use-cases/interfaces/create-product.use-case.interface';
-import { GetProductByIdUseCase } from '../../application/use-cases/interfaces/get-product-by-id.use-case.interface';
-import { GetAllProductsUseCase } from '../../application/use-cases/interfaces/get-all-products.use-case.interface';
-import { ProductResponseDto } from './dtos/product-response.dto';
-import { ProductRequestDto } from './dtos/product-request.dto';
 import { Result } from 'src/shared/result/result';
 import { UploadProductImageUseCase } from 'src/products/application/use-cases/interfaces/upload-product-image.use.case.interface';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ProductImageRequestDto } from './dtos/product-image-request.dto';
 import { Express } from 'express';
+import { CreateProductUseCase } from '../application/use-cases/interfaces/create-product.use-case.interface';
+import { GetProductByIdUseCase } from '../application/use-cases/interfaces/get-product-by-id.use-case.interface';
+import { GetAllProductsUseCase } from '../application/use-cases/interfaces/get-all-products.use-case.interface';
+import { ProductResponseDto } from './dtos/product-response.dto';
+import { ProductRequestDto } from './dtos/product-request.dto';
 import { ProductImageResponseDto } from './dtos/product-image-response.dto';
+import { ProductImageRequestDto } from './dtos/product-image-request.dto';
 
 @ApiTags('Productos')
 @Controller('api/products')

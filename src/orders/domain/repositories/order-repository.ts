@@ -1,4 +1,4 @@
-import { Order } from '../entities/order.entity';
+import { Order } from '../models/order.model';
 
 export interface OrderRepository {
   save(order: Order): Promise<Order>;

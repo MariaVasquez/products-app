@@ -10,10 +10,10 @@ import {
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateUserUseCase } from 'src/users/application/use-cases/interfaces/create-user.use-case.interface';
-import { UserResponseDto } from './dto/user-response.dto';
 import { Result } from 'src/shared/result/result';
-import { UserRequestDto } from './dto/user-request.dto';
 import { GetUserByIdUseCase } from 'src/users/application/use-cases/interfaces/get-user-by-id.use-case.interface';
+import { UserRequestDto } from './dto/user-request.dto';
+import { UserResponseDto } from './dto/user-response.dto';
 
 @ApiTags('Usuarios')
 @Controller('api/users')

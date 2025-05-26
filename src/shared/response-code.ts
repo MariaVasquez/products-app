@@ -61,13 +61,18 @@ export const ResponseCodes = {
     message: 'Unexpected error uploading product image',
   },
   DELETE_S3_ERROR: {
-    code: 'TRAPP_ERR_10',
+    code: 'TRAPP_ERR_11',
     httpStatus: 500,
     message: 'Unexpected error deleting product image',
   },
   ORDER_NO_ITEMS: {
-    code: 'ORDER_NO_ITEMS',
+    code: 'TRAPP_ERR_12',
     httpStatus: 400,
     message: 'Cannot process order: no products were provided.',
+  },
+  ORDER_NOT_FOUND: {
+    code: 'TRAPP_ERR_13',
+    httpStatus: 400,
+    message: 'Order not found',
   },
 } as const;
