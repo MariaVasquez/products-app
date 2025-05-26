@@ -11,6 +11,10 @@ import { Result } from 'src/shared/result/result';
 import { ResponseCodes } from 'src/shared/response-code';
 import { OrderTransaction } from 'src/orders/domain/models/order-transactions.model';
 import { TransactionStatus } from 'src/shared/enums/order-status.enum';
+import { WompiGateway } from 'src/payments/domain/ports/wompi.gateway';
+import { Order } from 'src/orders/domain/models/order.model';
+import { WompiResponse } from 'src/payments/controllers/dto/wompi-response.dto';
+import { PaymentMethod } from 'src/shared/enums/payment-method.enum';
 
 @Injectable()
 export class InitiatePaymentUseCaseImpl implements InitiatePaymentUseCase {
@@ -23,6 +27,9 @@ export class InitiatePaymentUseCaseImpl implements InitiatePaymentUseCase {
 
     @Inject('OrderTransactionRepository')
     private readonly transactionRepo: OrderTransactionRepository,
+
+    @Inject('WompiGateway')
+    private readonly wompiService: WompiGateway,
   ) {}
 
   async execute(
@@ -55,13 +62,28 @@ export class InitiatePaymentUseCaseImpl implements InitiatePaymentUseCase {
       TransactionStatus.PENDING,
       order.totalAmount,
       Currency.COP,
-      dto.paymentMethod,
+      PaymentMethod.CARD,
       order.id!,
       new Date(),
       new Date(),
     );
 
+    const existing = await this.transactionRepo.findOne(
+      order.id!,
+      TransactionStatus.PENDING,
+    );
+
+    if (existing) {
+      return Result.fail(
+        ResponseCodes.TRANSACTION_EXIST.code,
+        ResponseCodes.TRANSACTION_EXIST.message,
+        ResponseCodes.TRANSACTION_EXIST.httpStatus,
+      );
+    }
+
     await this.transactionRepo.save(transaction);
+
+    await this.processTransactionWompi(dto, reference, order);
 
     const response = new InitiatePaymentResponseDto();
     response.reference = reference;
@@ -76,5 +98,23 @@ export class InitiatePaymentUseCaseImpl implements InitiatePaymentUseCase {
       ResponseCodes.TRANSACTION_SUCCESS.message,
       ResponseCodes.TRANSACTION_SUCCESS.httpStatus,
     );
+  }
+
+  private async processTransactionWompi(
+    request: InitiatePaymentRequestDto,
+    reference: string,
+    order: Order,
+  ): Promise<WompiResponse> {
+    const wompiDto = {
+      amountInCents: order.totalAmount * 100,
+      currency: 'COP',
+      reference: reference,
+      customerEmail: request.wompi.customerEmail,
+      paymentToken: request.wompi.paymentToken,
+      installments: request.wompi.installments,
+      redirectUrl: request.wompi.redirectUrl,
+    };
+
+    return await this.wompiService.initiateTransaction(wompiDto);
   }
 }

@@ -16,6 +16,12 @@ export class OrderRepositoryImpl implements OrderRepository {
     @InjectRepository(OrdersEntity)
     private readonly repo: Repository<OrdersEntity>,
   ) {}
+  async findById(id: number): Promise<Order> {
+    const entity = await this.repo.findOne({
+      where: { id },
+    });
+    return OrderMapper.toDomain(entity!);
+  }
   async save(order: Order): Promise<Order> {
     try {
       const entityTransaction = order.transactions.map((t) => {

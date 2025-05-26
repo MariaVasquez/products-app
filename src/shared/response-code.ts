@@ -75,4 +75,14 @@ export const ResponseCodes = {
     httpStatus: 400,
     message: 'Order not found',
   },
+  TRANSACTION_NOT_FOUND: {
+    code: 'TRAPP_ERR_14',
+    httpStatus: 400,
+    message: 'Transaction not found',
+  },
+  TRANSACTION_EXIST: {
+    code: 'TRAPP_ERR_15',
+    httpStatus: 400,
+    message: 'There is already a pending transaction for this order.',
+  },
 } as const;

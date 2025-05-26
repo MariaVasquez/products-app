@@ -8,9 +8,14 @@ import { OrderTransactionTypeormAdapter } from './infrastructure/order/typeorm/o
 import { UserQueryTypeormAdapter } from 'src/orders/infraestructure/user/typeorm/user-query-typeorm-adapter';
 import { InitiatePaymentUseCaseImpl } from './application/use-cases/initiate-payment.use-case';
 import { OrderTransactionEntity } from 'src/orders/infraestructure/database/entities/order-transactions';
+import { HandleWompiWebhookUseCaseImpl } from './application/use-cases/handle-webhook.use-case';
+import { OrderRepositoryImpl } from 'src/orders/infraestructure/database/order.repository.impl';
+import { WompiHttpAdapter } from './infrastructure/services/wompi.service';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
+    HttpModule,
     TypeOrmModule.forFeature([
       UserEntity,
       OrdersEntity,
@@ -32,8 +37,20 @@ import { OrderTransactionEntity } from 'src/orders/infraestructure/database/enti
       useClass: OrderTransactionTypeormAdapter,
     },
     {
+      provide: 'OrderRepository',
+      useClass: OrderRepositoryImpl,
+    },
+    {
       provide: 'InitiatePaymentUseCase',
       useClass: InitiatePaymentUseCaseImpl,
+    },
+    {
+      provide: 'HandleWompiWebhookUseCase',
+      useClass: HandleWompiWebhookUseCaseImpl,
+    },
+    {
+      provide: 'WompiGateway',
+      useClass: WompiHttpAdapter,
     },
   ],
 })

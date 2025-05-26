@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { OrderTransaction } from 'src/orders/domain/models/order-transactions.model';
 import { OrderTransactionEntity } from 'src/orders/infraestructure/database/entities/order-transactions';
 import { OrderTransactionRepository } from 'src/payments/domain/order/ports/order-transaction.repository';
+import { TransactionStatus } from 'src/shared/enums/order-status.enum';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -13,6 +14,32 @@ export class OrderTransactionTypeormAdapter
     @InjectRepository(OrderTransactionEntity)
     private readonly repo: Repository<OrderTransactionEntity>,
   ) {}
+  async findOne(
+    orderId: number,
+    status: string,
+  ): Promise<OrderTransaction | null> {
+    const entity = await this.repo.findOne({
+      where: {
+        order: { id: orderId },
+        status: status as TransactionStatus,
+      },
+    });
+
+    return entity
+      ? new OrderTransaction(
+          entity.id,
+          entity.provider,
+          entity.external_id,
+          entity.status,
+          entity.amount,
+          entity.currency,
+          entity.payment_method,
+          entity.order.id,
+          entity.createdAt,
+          entity.updatedAt,
+        )
+      : null;
+  }
 
   async save(transaction: OrderTransaction): Promise<OrderTransaction> {
     const entity = this.repo.create({

@@ -12,7 +12,7 @@ import { TransactionStatus } from 'src/shared/enums/order-status.enum';
 @Entity({ name: 'order_transactions' })
 export class OrderTransactionEntity {
   @PrimaryGeneratedColumn()
-  id!: number;
+  id!: number | null;
 
   @ManyToOne(() => OrdersEntity, (order) => order.transactions, {
     onDelete: 'CASCADE',

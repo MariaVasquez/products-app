@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsEnum, IsInt } from 'class-validator';
-import { PaymentMethod } from 'src/shared/enums/payment-method.enum';
+import { Type } from 'class-transformer';
+import { IsInt, ValidateNested } from 'class-validator';
+import { WompiTransactionDto } from './wompi-transaction.dto';
 
 export class InitiatePaymentRequestDto {
   @ApiProperty({
@@ -10,18 +11,8 @@ export class InitiatePaymentRequestDto {
   @IsInt()
   orderId!: number;
 
-  @ApiProperty({
-    example: 'juan.cliente@yopmail.com',
-    description: 'Customer email used for the transaction',
-  })
-  @IsEmail()
-  customerEmail!: string;
-
-  @ApiProperty({
-    example: PaymentMethod.CARD,
-    enum: PaymentMethod,
-    description: 'Payment method (e.g., CARD, NEQUI, PSE)',
-  })
-  @IsEnum(PaymentMethod)
-  paymentMethod!: PaymentMethod;
+  @ApiProperty({ type: () => WompiTransactionDto })
+  @ValidateNested()
+  @Type(() => WompiTransactionDto)
+  wompi!: WompiTransactionDto;
 }
