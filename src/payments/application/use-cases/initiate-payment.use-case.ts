@@ -1,20 +1,20 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Currency } from 'src/shared/enums/currency.enum';
+import { Currency } from '../../../shared/enums/currency.enum';
 import { v4 as uuid } from 'uuid';
 import { InitiatePaymentUseCase } from './interfaces/initiate-payment.use-case.interface';
 import { OrderQueryService } from 'src/payments/domain/order/ports/order-query-service';
 import { UserQueryService } from 'src/orders/domain/user/ports/user-query-service';
 import { OrderTransactionRepository } from 'src/payments/domain/order/ports/order-transaction.repository';
-import { InitiatePaymentRequestDto } from 'src/payments/controllers/dto/initiate-payment-request.dto';
-import { InitiatePaymentResponseDto } from 'src/payments/controllers/dto/initiate-payment-response.dto';
-import { Result } from 'src/shared/result/result';
-import { ResponseCodes } from 'src/shared/response-code';
-import { OrderTransaction } from 'src/orders/domain/models/order-transactions.model';
-import { TransactionStatus } from 'src/shared/enums/order-status.enum';
-import { WompiGateway } from 'src/payments/domain/ports/wompi.gateway';
-import { Order } from 'src/orders/domain/models/order.model';
-import { WompiResponse } from 'src/payments/controllers/dto/wompi-response.dto';
-import { PaymentMethod } from 'src/shared/enums/payment-method.enum';
+import { InitiatePaymentRequestDto } from '../../../payments/controllers/dto/initiate-payment-request.dto';
+import { InitiatePaymentResponseDto } from '../../../payments/controllers/dto/initiate-payment-response.dto';
+import { Result } from '../../../shared/result/result';
+import { ResponseCodes } from '../../../shared/response-code';
+import { OrderTransaction } from '../../../orders/domain/models/order-transactions.model';
+import { TransactionStatus } from '../../../shared/enums/order-status.enum';
+import { WompiGateway } from '../../../payments/domain/ports/wompi.gateway';
+import { Order } from '../../../orders/domain/models/order.model';
+import { WompiResponse } from '../../../payments/controllers/dto/wompi-response.dto';
+import { PaymentMethod } from '../../../shared/enums/payment-method.enum';
 
 @Injectable()
 export class InitiatePaymentUseCaseImpl implements InitiatePaymentUseCase {

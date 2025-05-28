@@ -2,14 +2,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { OrdersEntity } from './entities/orders.entity';
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
-import { OrderRepository } from 'src/orders/domain/repositories/order-repository';
-import { Order } from 'src/orders/domain/models/order.model';
+import { OrderRepository } from '../../../orders/domain/repositories/order-repository';
+import { Order } from '../../../orders/domain/models/order.model';
 import { OrderItemEntity } from './entities/order-items.entity';
 import { OrderTransactionEntity } from './entities/order-transactions';
-import { ApiException } from 'src/shared/exceptions/ApiException';
-import { ResponseCodes } from 'src/shared/response-code';
-import { OrderMapper } from 'src/orders/application/mapper/order.mapper';
-import { OrderStatus } from 'src/shared/enums/order-status.enum';
+import { ApiException } from '../../../shared/exceptions/ApiException';
+import { ResponseCodes } from '../../../shared/response-code';
+import { OrderMapper } from '../../../orders/application/mapper/order.mapper';
+import { OrderStatus } from '../../../shared/enums/order-status.enum';
 
 @Injectable()
 export class OrderRepositoryImpl implements OrderRepository {

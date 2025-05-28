@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { OrderItem } from 'src/orders/domain/models/order-items.model';
-import { OrderTransaction } from 'src/orders/domain/models/order-transactions.model';
-import { Order } from 'src/orders/domain/models/order.model';
-import { OrdersEntity } from 'src/orders/infraestructure/database/entities/orders.entity';
-import { OrderQueryService } from 'src/payments/domain/order/ports/order-query-service';
+import { OrderItem } from '../../../../orders/domain/models/order-items.model';
+import { OrderTransaction } from '../../../../orders/domain/models/order-transactions.model';
+import { Order } from '../../../../orders/domain/models/order.model';
+import { OrdersEntity } from '../../../../orders/infraestructure/database/entities/orders.entity';
+import { OrderQueryService } from '../../../../payments/domain/order/ports/order-query-service';
 import { Repository } from 'typeorm';
 
 @Injectable()

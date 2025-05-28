@@ -1,4 +1,4 @@
-import { User } from 'src/users/domain/entities/user.entity';
+import { User } from 'src/users/domain/models/user.model';
 import { UserRequestDto } from 'src/users/interfaces/dto/user-request.dto';
 
 export const mockUserRequest: UserRequestDto = {

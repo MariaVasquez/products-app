@@ -2,14 +2,14 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { AxiosResponse } from 'axios';
 import { firstValueFrom } from 'rxjs';
-import { WompiTransactionDto } from 'src/payments/controllers/dto/wompi-transaction.dto';
-import { WompiGateway } from 'src/payments/domain/ports/wompi.gateway';
-import { WompiResponse } from 'src/payments/controllers/dto/wompi-response.dto';
+import { WompiTransactionDto } from '../../../payments/controllers/dto/wompi-transaction.dto';
+import { WompiGateway } from '../../../payments/domain/ports/wompi.gateway';
+import { WompiResponse } from '../../../payments/controllers/dto/wompi-response.dto';
 import { WompiApiResponse } from './wompi-api-response.interface';
 import * as crypto from 'crypto';
 import { WompiMerchantResponse } from './wompi.merchant.response.interface';
-import { ResponseCodes } from 'src/shared/response-code';
-import { ApiException } from 'src/shared/exceptions/ApiException';
+import { ResponseCodes } from '../../../shared/response-code';
+import { ApiException } from '../../../shared/exceptions/ApiException';
 
 @Injectable()
 export class WompiHttpAdapter implements WompiGateway {

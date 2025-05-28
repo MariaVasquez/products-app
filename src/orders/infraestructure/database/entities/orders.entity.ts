@@ -7,9 +7,10 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { OrderItemEntity } from './order-items.entity';
-import { OrderStatus } from 'src/shared/enums/order-status.enum';
+import { OrderStatus } from '../../../../shared/enums/order-status.enum';
 import { OrderTransactionEntity } from './order-transactions';
 
+const isTest = process.env.NODE_ENV === 'test';
 @Entity({ name: 'orders' })
 export class OrdersEntity {
   @PrimaryGeneratedColumn()
@@ -19,8 +20,8 @@ export class OrdersEntity {
   user_id!: number;
 
   @Column({
-    type: 'enum',
-    enum: OrderStatus,
+    type: isTest ? 'text' : 'enum',
+    enum: isTest ? undefined : OrderStatus,
     default: OrderStatus.PENDING,
   })
   status!: OrderStatus;

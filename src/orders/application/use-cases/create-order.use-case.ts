@@ -1,17 +1,17 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateOrderUseCase } from './interfaces/create-order.use-case.interface';
-import { ProductQueryTypeormAdapter } from 'src/orders/infraestructure/product/typeorm/product-query-typeorm-adapter';
-import { OrderRequestDto } from 'src/orders/interfaces/dto/order.request.dto';
-import { UserQueryTypeormAdapter } from 'src/orders/infraestructure/user/typeorm/user-query-typeorm-adapter';
-import { Result } from 'src/shared/result/result';
-import { Order } from 'src/orders/domain/models/order.model';
-import { OrderResponseDto } from 'src/orders/interfaces/dto/order-response.dto';
-import { ResponseCodes } from 'src/shared/response-code';
-import { OrderItem } from 'src/orders/domain/models/order-items.model';
-import { OrderStatus } from 'src/shared/enums/order-status.enum';
+import { ProductQueryTypeormAdapter } from '../../../orders/infraestructure/product/typeorm/product-query-typeorm-adapter';
+import { OrderRequestDto } from '../../../orders/interfaces/dto/order.request.dto';
+import { UserQueryTypeormAdapter } from '../../../orders/infraestructure/user/typeorm/user-query-typeorm-adapter';
+import { Result } from '../../../shared/result/result';
+import { Order } from '../../../orders/domain/models/order.model';
+import { OrderResponseDto } from '../../../orders/interfaces/dto/order-response.dto';
+import { ResponseCodes } from '../../../shared/response-code';
+import { OrderItem } from '../../../orders/domain/models/order-items.model';
+import { OrderStatus } from '../../../shared/enums/order-status.enum';
 import { OrderRepository } from 'src/orders/domain/repositories/order-repository';
-import { OrderItemResponseDto } from 'src/orders/interfaces/dto/order-item-response.dto';
-import { User } from 'src/users/domain/models/user.model';
+import { OrderItemResponseDto } from '../../../orders/interfaces/dto/order-item-response.dto';
+import { User } from '../../../users/domain/models/user.model';
 
 @Injectable()
 export class CreateOrderUseCaseImpl implements CreateOrderUseCase {

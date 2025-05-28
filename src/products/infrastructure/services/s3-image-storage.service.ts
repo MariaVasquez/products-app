@@ -5,8 +5,8 @@ import {
   DeleteObjectCommand,
 } from '@aws-sdk/client-s3';
 import { ImageStorageService } from '../../domain/services/image-storage.service';
-import { InfrastructureException } from 'src/shared/exceptions/infrastructure-exception';
-import { ResponseCodes } from 'src/shared/response-code';
+import { InfrastructureException } from '../../../shared/exceptions/infrastructure-exception';
+import { ResponseCodes } from '../../../shared/response-code';
 
 @Injectable()
 export class S3ImageStorageService implements ImageStorageService {

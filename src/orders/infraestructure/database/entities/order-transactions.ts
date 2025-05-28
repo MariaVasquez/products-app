@@ -7,8 +7,9 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { OrdersEntity } from './orders.entity';
-import { TransactionStatus } from 'src/shared/enums/order-status.enum';
+import { TransactionStatus } from '../../../../shared/enums/order-status.enum';
 
+const isTest = process.env.NODE_ENV === 'test';
 @Entity({ name: 'order_transactions' })
 export class OrderTransactionEntity {
   @PrimaryGeneratedColumn()
@@ -26,8 +27,8 @@ export class OrderTransactionEntity {
   external_id!: string;
 
   @Column({
-    type: 'enum',
-    enum: TransactionStatus,
+    type: isTest ? 'text' : 'enum',
+    enum: isTest ? undefined : TransactionStatus,
     default: TransactionStatus.PENDING,
   })
   status!: TransactionStatus;

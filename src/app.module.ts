@@ -18,9 +18,9 @@ import { typeOrmTestConfig } from './config/database.test.config';
     OrdersModule,
     PaymentsModule,
     UsersModule,
-    TypeOrmModule.forRootAsync(
-      process.env.NODE_ENV === 'test' ? typeOrmTestConfig : typeOrmConfigAsync,
-    ),
+    ...(process.env.NODE_ENV === 'test'
+      ? [TypeOrmModule.forRoot(typeOrmTestConfig)]
+      : [TypeOrmModule.forRootAsync(typeOrmConfigAsync)]),
   ],
   controllers: [],
   providers: [],

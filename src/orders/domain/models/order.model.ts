@@ -1,4 +1,4 @@
-import { OrderStatus } from 'src/shared/enums/order-status.enum';
+import { OrderStatus } from '../../../shared/enums/order-status.enum';
 import { OrderItem } from './order-items.model';
 import { OrderTransaction } from './order-transactions.model';
 

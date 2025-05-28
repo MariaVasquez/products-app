@@ -7,7 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { ProductImageEntity } from './product-images.entity';
-import { ProductColor } from 'src/products/domain/model/product-color.model';
+import { ProductColor } from '../../../../products/domain/model/product-color.model';
 
 @Entity({ name: 'products' })
 export class ProductEntity {

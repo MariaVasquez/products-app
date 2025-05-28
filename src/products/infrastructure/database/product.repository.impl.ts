@@ -5,9 +5,9 @@ import { ProductRepository } from '../../domain/repositories/product.repository'
 import { Product } from '../../domain/model/product.model';
 import { Injectable } from '@nestjs/common';
 import { ProductImageEntity } from './entities/product-images.entity';
-import { ProductMapper } from 'src/products/application/mappers/product.mapper';
-import { ApiException } from 'src/shared/exceptions/ApiException';
-import { ResponseCodes } from 'src/shared/response-code';
+import { ProductMapper } from '../../../products/application/mappers/product.mapper';
+import { ApiException } from '../../../shared/exceptions/ApiException';
+import { ResponseCodes } from '../../../shared/response-code';
 
 @Injectable()
 export class ProductRepositoryImpl implements ProductRepository {

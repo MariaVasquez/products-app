@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { OrderTransaction } from 'src/orders/domain/models/order-transactions.model';
-import { OrderTransactionEntity } from 'src/orders/infraestructure/database/entities/order-transactions';
-import { OrderTransactionRepository } from 'src/payments/domain/order/ports/order-transaction.repository';
-import { TransactionStatus } from 'src/shared/enums/order-status.enum';
+import { OrderTransaction } from '../../../../orders/domain/models/order-transactions.model';
+import { OrderTransactionEntity } from '../../../../orders/infraestructure/database/entities/order-transactions';
+import { OrderTransactionRepository } from '../../../../payments/domain/order/ports/order-transaction.repository';
+import { TransactionStatus } from '../../../../shared/enums/order-status.enum';
 import { Repository } from 'typeorm';
 
 @Injectable()

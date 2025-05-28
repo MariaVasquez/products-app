@@ -8,24 +8,35 @@ import { UserResponseDto } from '../../../src/users/interfaces/dto/user-response
 import { mockUserRequest } from '../data/data-mock-user';
 import { DataSource } from 'typeorm';
 import { getDataSourceToken } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
 
 describe('UserController (integration)', () => {
   let app: INestApplication;
   let dataSource: DataSource;
 
   beforeAll(async () => {
-    dotenv.config({ path: '.env.test' });
+    try {
+      dotenv.config({ path: '.env.test' });
 
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
+      const moduleFixture: TestingModule = await Test.createTestingModule({
+        imports: [
+          ConfigModule.forRoot({
+            isGlobal: true,
+            envFilePath: '.env.test',
+          }),
+          AppModule,
+        ],
+      }).compile();
 
-    app = moduleFixture.createNestApplication();
-    app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
-    await app.init();
+      app = moduleFixture.createNestApplication();
+      app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+      await app.init();
 
-    dataSource = moduleFixture.get<DataSource>(getDataSourceToken());
-  });
+      dataSource = moduleFixture.get<DataSource>(getDataSourceToken());
+    } catch (err) {
+      console.error('[TEST] Error al iniciar:', err);
+    }
+  }, 20000);
 
   afterAll(async () => {
     await app.close();

@@ -1,8 +1,8 @@
-import { ProductImage } from 'src/products/domain/model/product-image.model';
-import { Product } from 'src/products/domain/model/product.model';
-import { ProductEntity } from 'src/products/infrastructure/database/entities/product.entity';
-import { ProductImageResponseDto } from 'src/products/controllers/dtos/product-image-response.dto';
-import { ProductResponseDto } from 'src/products/controllers/dtos/product-response.dto';
+import { ProductImage } from '../../../products/domain/model/product-image.model';
+import { Product } from '../../../products/domain/model/product.model';
+import { ProductEntity } from '../../../products/infrastructure/database/entities/product.entity';
+import { ProductImageResponseDto } from '../../../products/controllers/dtos/product-image-response.dto';
+import { ProductResponseDto } from '../../../products/controllers/dtos/product-response.dto';
 
 export class ProductMapper {
   static entityToInterface(entity: ProductEntity): ProductResponseDto {

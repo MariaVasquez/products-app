@@ -4,7 +4,7 @@ import { mockDeep, mockReset, DeepMockProxy } from 'jest-mock-extended';
 import { mockUserEntity } from '../data/data-mock-user';
 import { GetUserByIdUseCaseImpl } from '../../../src/users/application/use-cases/get-user-by-id.use-case';
 import { ResponseCodes } from '../../../src/shared/response-code';
-/*describe('GetUserByIdUseCase', () => {
+describe('GetUserByIdUseCase', () => {
   let mockConfigService: DeepMockProxy<ConfigService>;
   let mockUserRepo: DeepMockProxy<UserRepository>;
   let useCase: GetUserByIdUseCaseImpl;
@@ -30,4 +30,4 @@ import { ResponseCodes } from '../../../src/shared/response-code';
     expect(result.isFailure()).toBe(true);
     expect(result.code).toBe(ResponseCodes.USER_NOT_FOUND.code);
   });
-});*/
+});

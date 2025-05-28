@@ -1,7 +1,7 @@
-import { OrderItem } from 'src/orders/domain/models/order-items.model';
-import { OrderTransaction } from 'src/orders/domain/models/order-transactions.model';
-import { Order } from 'src/orders/domain/models/order.model';
-import { OrdersEntity } from 'src/orders/infraestructure/database/entities/orders.entity';
+import { OrderItem } from '../../../orders/domain/models/order-items.model';
+import { OrderTransaction } from '../../../orders/domain/models/order-transactions.model';
+import { Order } from '../../../orders/domain/models/order.model';
+import { OrdersEntity } from '../../../orders/infraestructure/database/entities/orders.entity';
 
 export class OrderMapper {
   static toDomain(entity: OrdersEntity): Order {

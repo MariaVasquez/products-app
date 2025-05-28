@@ -1,20 +1,20 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { HandleWompiWebhookUseCase } from './interfaces/handle-webhook.use-case.interface';
 import { OrderTransactionRepository } from 'src/payments/domain/order/ports/order-transaction.repository';
-import { OrderRepository } from 'src/orders/domain/repositories/order-repository';
-import { WompiWebhookDto } from 'src/payments/controllers/dto/webhook/wompi.webhook.dto';
-import { ResponseCodes } from 'src/shared/response-code';
-import { ApiException } from 'src/shared/exceptions/ApiException';
+import { OrderRepository } from '../../../orders/domain/repositories/order-repository';
+import { WompiWebhookDto } from '../../../payments/controllers/dto/webhook/wompi.webhook.dto';
+import { ResponseCodes } from '../../../shared/response-code';
+import { ApiException } from '../../../shared/exceptions/ApiException';
 import {
   OrderStatus,
   TransactionStatus,
-} from 'src/shared/enums/order-status.enum';
+} from '../../../shared/enums/order-status.enum';
 import { DataSource, EntityManager } from 'typeorm';
 import { InjectDataSource } from '@nestjs/typeorm';
-import { OrderTransactionEntity } from 'src/orders/infraestructure/database/entities/order-transactions';
-import { OrdersEntity } from 'src/orders/infraestructure/database/entities/orders.entity';
+import { OrderTransactionEntity } from '../../../orders/infraestructure/database/entities/order-transactions';
+import { OrdersEntity } from '../../../orders/infraestructure/database/entities/orders.entity';
 import { ProductRepository } from 'src/products/domain/repositories/product.repository';
-import { ProductEntity } from 'src/products/infrastructure/database/entities/product.entity';
+import { ProductEntity } from '../../../products/infrastructure/database/entities/product.entity';
 
 @Injectable()
 export class HandleWompiWebhookUseCaseImpl
