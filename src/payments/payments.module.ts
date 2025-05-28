@@ -12,6 +12,8 @@ import { HandleWompiWebhookUseCaseImpl } from './application/use-cases/handle-we
 import { OrderRepositoryImpl } from 'src/orders/infraestructure/database/order.repository.impl';
 import { WompiHttpAdapter } from './infrastructure/services/wompi.service';
 import { HttpModule } from '@nestjs/axios';
+import { ProductRepositoryImpl } from 'src/products/infrastructure/database/product.repository.impl';
+import { ProductEntity } from 'src/products/infrastructure/database/entities/product.entity';
 
 @Module({
   imports: [
@@ -20,6 +22,7 @@ import { HttpModule } from '@nestjs/axios';
       UserEntity,
       OrdersEntity,
       OrderTransactionEntity,
+      ProductEntity,
     ]),
   ],
   controllers: [PaymentsController],
@@ -39,6 +42,10 @@ import { HttpModule } from '@nestjs/axios';
     {
       provide: 'OrderRepository',
       useClass: OrderRepositoryImpl,
+    },
+    {
+      provide: 'ProductRepository',
+      useClass: ProductRepositoryImpl,
     },
     {
       provide: 'InitiatePaymentUseCase',

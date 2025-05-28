@@ -9,6 +9,7 @@ import { OrderTransactionEntity } from './entities/order-transactions';
 import { ApiException } from 'src/shared/exceptions/ApiException';
 import { ResponseCodes } from 'src/shared/response-code';
 import { OrderMapper } from 'src/orders/application/mapper/order.mapper';
+import { OrderStatus } from 'src/shared/enums/order-status.enum';
 
 @Injectable()
 export class OrderRepositoryImpl implements OrderRepository {
@@ -16,6 +17,13 @@ export class OrderRepositoryImpl implements OrderRepository {
     @InjectRepository(OrdersEntity)
     private readonly repo: Repository<OrdersEntity>,
   ) {}
+  async findOrderByUser(idUser: number): Promise<Order | null> {
+    const entity = await this.repo.findOne({
+      where: { user_id: idUser, status: OrderStatus.PENDING },
+    });
+
+    return entity ? OrderMapper.toDomain(entity) : null;
+  }
   async findById(id: number): Promise<Order> {
     const entity = await this.repo.findOne({
       where: { id },

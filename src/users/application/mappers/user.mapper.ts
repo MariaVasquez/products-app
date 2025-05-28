@@ -1,11 +1,11 @@
-import { Address } from '../../domain/entities/adress.entity';
-import { User } from '../../domain/entities/user.entity';
 import { UserResponseDto } from '../../interfaces/dto/user-response.dto';
 import { AddressResponseDto } from '../../interfaces/dto/address-response.dto';
 import { AddressRequestDto } from '../../interfaces/dto/address-request.dto';
 import { UserRequestDto } from '../../interfaces/dto/user-request.dto';
 import { UserEntity } from '../../infrastructure/database/entities/user.entity';
 import { AddressEntity } from '../../infrastructure/database/entities/address.entity';
+import { User } from '../../domain/models/user.model';
+import { Address } from '../../domain/models/adress.model';
 
 export class UserMapper {
   static interfacesToDomain(dto: UserRequestDto): User {

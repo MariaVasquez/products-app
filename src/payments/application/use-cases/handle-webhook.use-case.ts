@@ -13,6 +13,8 @@ import { DataSource, EntityManager } from 'typeorm';
 import { InjectDataSource } from '@nestjs/typeorm';
 import { OrderTransactionEntity } from 'src/orders/infraestructure/database/entities/order-transactions';
 import { OrdersEntity } from 'src/orders/infraestructure/database/entities/orders.entity';
+import { ProductRepository } from 'src/products/domain/repositories/product.repository';
+import { ProductEntity } from 'src/products/infrastructure/database/entities/product.entity';
 
 @Injectable()
 export class HandleWompiWebhookUseCaseImpl
@@ -24,12 +26,14 @@ export class HandleWompiWebhookUseCaseImpl
 
     @Inject('OrderRepository')
     private readonly orderRepo: OrderRepository,
+    @Inject('ProductRepository')
+    private readonly productRepo: ProductRepository,
     @InjectDataSource()
     private readonly dataSource: DataSource,
   ) {}
 
   async execute(payload: WompiWebhookDto): Promise<void> {
-    console.log('Init webhook');
+    console.log('Init webhook', payload);
     if (payload.event !== 'transaction.updated') {
       console.warn('No es evento de transacción');
       return;
@@ -64,6 +68,33 @@ export class HandleWompiWebhookUseCaseImpl
           console.log('Success update status order');
           order.status = OrderStatus.PAID;
           await manager.save(order);
+        }
+
+        if (!order) {
+          throw new ApiException('Orden no encontrada', 404);
+        }
+
+        for (const item of order.items) {
+          const product = await manager.findOne(ProductEntity, {
+            where: { id: item.product_id },
+          });
+
+          if (!product) {
+            throw new ApiException(
+              `Producto con ID ${item.product_id} no encontrado`,
+              404,
+            );
+          }
+
+          if (product.stock < item.quantity) {
+            throw new ApiException(
+              `Stock insuficiente para el producto ${product.name}`,
+              400,
+            );
+          }
+
+          product.stock -= item.quantity;
+          await manager.save(product);
         }
       }
     });

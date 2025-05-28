@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Currency } from 'src/shared/enums/currency.enum';
+import { Currency } from '../../../shared/enums/currency.enum';
 
 export class InitiatePaymentResponseDto {
   @ApiProperty({

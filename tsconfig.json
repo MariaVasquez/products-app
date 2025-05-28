@@ -1,24 +1,24 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "ES2021",                    // 👈 más compatible con herramientas modernas
+    "target": "ES2020",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,             
     "declaration": true,
     "removeComments": true,
-    "experimentalDecorators": true,       // ✅ Necesario para @decorators
-    "emitDecoratorMetadata": true,        // ✅ Necesario para class-validator
+    "experimentalDecorators": true,     
+    "emitDecoratorMetadata": true,      
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
-    "skipLibCheck": true,
-    "strict": true,                       // 👌 buena práctica
+    "strict": true,                      
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": true,                // ✅ Mejora seguridad de tipos
+    "noImplicitAny": true,             
     "strictBindCallApply": true,
     "noFallthroughCasesInSwitch": true,
-    "moduleResolution": "node",           // ✅ Recomendado para NestJS
-    "esModuleInterop": true               // ✅ Para que Swagger y otros paquetes trabajen bien
   }
 }

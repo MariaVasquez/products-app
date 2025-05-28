@@ -4,7 +4,7 @@ import { GetProductByIdUseCase } from './interfaces/get-product-by-id.use-case.i
 import { Result } from 'src/shared/result/result';
 import { ProductResponseDto } from 'src/products/controllers/dtos/product-response.dto';
 import { ProductMapper } from '../mappers/product.mapper';
-import { ResponseCodes } from 'src/shared/response-code';
+import { ResponseCodes } from '../../../shared/response-code';
 
 @Injectable()
 export class GetProductByIdUseCaseImpl implements GetProductByIdUseCase {

@@ -5,4 +5,5 @@ export interface ProductRepository {
   findById(id: number): Promise<Product | null>;
   findByName(name: string): Promise<Product | null>;
   findAll(): Promise<Product[]>;
+  updateQuantity(id: number, quantity: number): Promise<Product>;
 }

@@ -6,7 +6,7 @@ import { Result } from 'src/shared/result/result';
 import { ProductResponseDto } from 'src/products/controllers/dtos/product-response.dto';
 import { Product } from 'src/products/domain/model/product.model';
 import { ProductMapper } from '../mappers/product.mapper';
-import { ResponseCodes } from 'src/shared/response-code';
+import { ResponseCodes } from '../../../shared/response-code';
 
 @Injectable()
 export class CreateProductUseCaseImpl implements CreateProductUseCase {
@@ -34,6 +34,7 @@ export class CreateProductUseCaseImpl implements CreateProductUseCase {
       input.stock,
       input.isActive ?? true,
       [],
+      input.productColor ?? { color: 'Unico', hexadecimalRgb: '#ffffff' },
     );
 
     const saved = await this.productRepo.save(product);

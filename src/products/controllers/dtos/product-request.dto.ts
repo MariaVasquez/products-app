@@ -4,12 +4,12 @@ import {
   IsInt,
   IsBoolean,
   Min,
-  ValidateNested,
-  IsArray,
   Length,
+  IsArray,
+  ValidateNested,
 } from 'class-validator';
+import { ProductColorRequestDto } from './product-colors-request.dto';
 import { Type } from 'class-transformer';
-import { ProductImageRequestDto } from './product-image-request.dto';
 
 export class ProductRequestDto {
   @ApiProperty({
@@ -51,29 +51,19 @@ export class ProductRequestDto {
   stock!: number;
 
   @ApiProperty({
+    type: ProductColorRequestDto,
+    isArray: true,
+  })
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => ProductColorRequestDto)
+  productColor?: ProductColorRequestDto;
+
+  @ApiProperty({
     description: 'Indica si el producto está activo para la venta',
     example: true,
     default: true,
   })
   @IsBoolean()
   isActive?: boolean = true;
-
-  @ApiProperty({
-    description: 'Lista de imágenes asociadas al producto',
-    type: [ProductImageRequestDto],
-    required: false,
-    example: [
-      {
-        isMain: true,
-        order: 1,
-        filename: 'product-image-1.jpg',
-        content: 'base64encoded==',
-        mimeType: 'image/jpeg',
-      },
-    ],
-  })
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => ProductImageRequestDto)
-  images?: ProductImageRequestDto[];
 }

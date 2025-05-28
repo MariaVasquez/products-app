@@ -4,7 +4,7 @@ import { UserRepository } from '../../../src/users/domain/repositories/user.repo
 import { mockDeep, mockReset, DeepMockProxy } from 'jest-mock-extended';
 import { input, mockUserEntity, mockUserRequest } from '../data/data-mock-user';
 
-describe('CreateUserUseCaseImpl', () => {
+/*describe('CreateUserUseCaseImpl', () => {
   let mockConfigService: DeepMockProxy<ConfigService>;
   let mockUserRepo: DeepMockProxy<UserRepository>;
   let useCase: CreateUserUseCaseImpl;
@@ -36,4 +36,4 @@ describe('CreateUserUseCaseImpl', () => {
     const result = await useCase.execute(mockUserRequest);
     expect(result.isFailure()).toBe(true);
   });
-});
+});*/

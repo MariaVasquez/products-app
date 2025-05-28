@@ -4,7 +4,7 @@ import { AppModule } from '../../../src/app.module';
 import request from 'supertest';
 import * as dotenv from 'dotenv';
 import { Result } from 'src/shared/result/result';
-import { UserResponseDto } from 'src/users/interfaces/dto/user-response.dto';
+import { UserResponseDto } from '../../../src/users/interfaces/dto/user-response.dto';
 import { mockUserRequest } from '../data/data-mock-user';
 import { DataSource } from 'typeorm';
 import { getDataSourceToken } from '@nestjs/typeorm';

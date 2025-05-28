@@ -23,6 +23,9 @@ export class ProductMapper {
     response.currency = entity.currency;
     response.stock = entity.stock;
     response.isActive = entity.isActive;
+    response.productColor = !entity.colors
+      ? { color: 'Unico', hexadecimalRgb: '#ffffff' }
+      : entity.colors;
     response.createdAt = entity.createdAt;
     response.updatedAt = entity.updatedAt;
     response.images = responseProductImage;
@@ -47,6 +50,9 @@ export class ProductMapper {
     response.currency = domain.currency;
     response.stock = domain.stock;
     response.isActive = domain.isActive;
+    response.productColor = !domain.colors
+      ? { color: 'Unico', hexadecimalRgb: '#ffffff' }
+      : domain.colors;
     response.createdAt = domain.createdAt;
     response.updatedAt = domain.updatedAt;
     response.images = responseProductImage;
@@ -75,6 +81,7 @@ export class ProductMapper {
       p.stock,
       p.isActive,
       productImages ?? [],
+      p.colors ?? { color: 'Unico', hexadecimalRgb: '#ffffff' },
       p.createdAt,
       p.updatedAt,
     );

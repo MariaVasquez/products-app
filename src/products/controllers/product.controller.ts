@@ -30,6 +30,7 @@ import { ProductResponseDto } from './dtos/product-response.dto';
 import { ProductRequestDto } from './dtos/product-request.dto';
 import { ProductImageResponseDto } from './dtos/product-image-response.dto';
 import { ProductImageRequestDto } from './dtos/product-image-request.dto';
+import { UpdateQuantityProductUseCase } from '../application/use-cases/interfaces/update-quantity-product.use-case.interface';
 
 @ApiTags('Productos')
 @Controller('api/products')
@@ -43,6 +44,8 @@ export class ProductController {
     private readonly getAllUseCase: GetAllProductsUseCase,
     @Inject('UploadProductImageUseCase')
     private readonly uploadImageUseCase: UploadProductImageUseCase,
+    @Inject('UpdateQuantityProductUseCase')
+    private readonly uploadStockProduct: UpdateQuantityProductUseCase,
   ) {}
 
   @Post()
@@ -69,6 +72,16 @@ export class ProductController {
   @ApiResponse({ status: 200, type: ProductResponseDto })
   async findById(@Param('id') id: number): Promise<Result<ProductResponseDto>> {
     return await this.getByIdUseCase.execute(id);
+  }
+
+  @Get(':id/:quantity')
+  @ApiOperation({ summary: 'Actualizar stock por ID del product' })
+  @ApiResponse({ status: 200, type: ProductResponseDto })
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Param('quantity', ParseIntPipe) quantity: number,
+  ) {
+    return this.uploadStockProduct.execute(id, quantity);
   }
 
   @Post(':productId/images')

@@ -4,7 +4,7 @@ import { GetAllProductsUseCase } from './interfaces/get-all-products.use-case.in
 import { Result } from 'src/shared/result/result';
 import { ProductResponseDto } from 'src/products/controllers/dtos/product-response.dto';
 import { ProductMapper } from '../mappers/product.mapper';
-import { ResponseCodes } from 'src/shared/response-code';
+import { ResponseCodes } from '../../../shared/response-code';
 
 @Injectable()
 export class GetAllProductsUseCaseImpl implements GetAllProductsUseCase {

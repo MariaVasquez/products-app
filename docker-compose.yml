@@ -14,3 +14,15 @@ services:
         interval: 10s
         timeout: 5s
         retries: 10
+
+    api:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      container_name: nestjs-api
+      ports:
+        - "5001:5001"
+      env_file:
+        - ./environments/.env.prod
+      environment:
+        NODE_ENV: prod

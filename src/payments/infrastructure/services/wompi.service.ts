@@ -15,7 +15,10 @@ import { ApiException } from 'src/shared/exceptions/ApiException';
 export class WompiHttpAdapter implements WompiGateway {
   constructor(private readonly httpService: HttpService) {}
 
-  async initiateTransaction(dto: WompiTransactionDto): Promise<WompiResponse> {
+  async initiateTransaction(
+    dto: WompiTransactionDto,
+    reference: string,
+  ): Promise<WompiResponse> {
     try {
       const merchantResponse: AxiosResponse<WompiMerchantResponse> =
         await firstValueFrom(
@@ -37,9 +40,9 @@ export class WompiHttpAdapter implements WompiGateway {
           token: dto.paymentToken,
           installments: dto.installments,
         },
-        reference: dto.reference,
+        reference: reference,
         redirect_url: dto.redirectUrl,
-        signature: this.processSignature(dto),
+        signature: this.processSignature(dto, reference),
       };
 
       const response: AxiosResponse<WompiApiResponse> = await firstValueFrom(
@@ -69,8 +72,11 @@ export class WompiHttpAdapter implements WompiGateway {
     }
   }
 
-  private processSignature(dto: WompiTransactionDto): string {
-    const stringToSign = `${dto.reference}${dto.amountInCents}${dto.currency}${process.env.WOMPI_INTEGRITY_SECRET}`;
+  private processSignature(
+    dto: WompiTransactionDto,
+    reference: string,
+  ): string {
+    const stringToSign = `${reference}${dto.amountInCents}${dto.currency}${process.env.WOMPI_INTEGRITY_SECRET}`;
     const signature = crypto
       .createHash('sha256')
       .update(stringToSign)

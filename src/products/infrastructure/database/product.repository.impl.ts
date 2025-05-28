@@ -15,6 +15,22 @@ export class ProductRepositoryImpl implements ProductRepository {
     @InjectRepository(ProductEntity)
     private readonly repo: Repository<ProductEntity>,
   ) {}
+  async updateQuantity(id: number, quantity: number): Promise<Product> {
+    console.log('Init update', id);
+    try {
+      const entity = await this.repo.findOneBy({ id });
+      if (!entity || entity.stock === undefined) {
+        throw new Error('Producto no encontrado o stock no definido');
+      }
+
+      entity.stock = entity.stock - quantity;
+      const saved = await this.repo.save(entity);
+      return ProductMapper.domainToEntity(saved);
+    } catch (error) {
+      console.error('Error to update product', error);
+      throw new Error('No se pudo obtener el producto actualizado');
+    }
+  }
   async findByName(name: string): Promise<Product | null> {
     const entity = await this.repo.findOneBy({ name });
     return entity ? ProductMapper.domainToEntity(entity) : null;
@@ -29,6 +45,7 @@ export class ProductRepositoryImpl implements ProductRepository {
       entity.currency = product.currency;
       entity.stock = product.stock;
       entity.isActive = product.isActive;
+      entity.colors = product.colors;
       entity.images = product.images?.map((i) => {
         const productImages = new ProductImageEntity();
         productImages.url = i.url;

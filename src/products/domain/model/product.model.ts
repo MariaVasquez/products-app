@@ -1,3 +1,4 @@
+import { ProductColor } from './product-color.model';
 import { ProductImage } from './product-image.model';
 
 export class Product {
@@ -10,6 +11,7 @@ export class Product {
     public stock: number,
     public isActive: boolean,
     public images: ProductImage[],
+    public colors?: ProductColor,
     public readonly createdAt?: Date,
     public readonly updatedAt?: Date,
   ) {}

@@ -85,4 +85,9 @@ export const ResponseCodes = {
     httpStatus: 400,
     message: 'There is already a pending transaction for this order.',
   },
+  ORDER_PENDING_EXIST: {
+    code: 'TRAPP_ERR_16',
+    httpStatus: 400,
+    message: 'There is already a pending for order.',
+  },
 } as const;

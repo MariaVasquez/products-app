@@ -14,6 +14,7 @@ import { Result } from 'src/shared/result/result';
 import { GetUserByIdUseCase } from 'src/users/application/use-cases/interfaces/get-user-by-id.use-case.interface';
 import { UserRequestDto } from './dto/user-request.dto';
 import { UserResponseDto } from './dto/user-response.dto';
+import { GetUserByEmailUseCase } from '../application/use-cases/interfaces/get-user-by-email.use-case.interface';
 
 @ApiTags('Usuarios')
 @Controller('api/users')
@@ -23,6 +24,8 @@ export class UserController {
     private readonly createUserUseCase: CreateUserUseCase,
     @Inject('GetUserByIdUseCase')
     private readonly getUserByIdUseCase: GetUserByIdUseCase,
+    @Inject('GetUserByEmailUseCase')
+    private readonly getUserByEmailUseCase: GetUserByEmailUseCase,
   ) {}
 
   @Post()
@@ -52,5 +55,19 @@ export class UserController {
   })
   async getUserById(@Param('id') id: number): Promise<Result<UserResponseDto>> {
     return await this.getUserByIdUseCase.execute(id);
+  }
+
+  @Get('/email/:email')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Consultar un usuario por email' })
+  @ApiResponse({
+    status: 200,
+    description: 'Usuario encontrado',
+    type: UserRequestDto,
+  })
+  async getUserByEmail(
+    @Param('email') email: string,
+  ): Promise<Result<UserResponseDto>> {
+    return await this.getUserByEmailUseCase.execute(email);
   }
 }

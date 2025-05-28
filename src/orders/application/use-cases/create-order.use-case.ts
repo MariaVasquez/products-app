@@ -11,7 +11,7 @@ import { OrderItem } from 'src/orders/domain/models/order-items.model';
 import { OrderStatus } from 'src/shared/enums/order-status.enum';
 import { OrderRepository } from 'src/orders/domain/repositories/order-repository';
 import { OrderItemResponseDto } from 'src/orders/interfaces/dto/order-item-response.dto';
-import { User } from 'src/users/domain/entities/user.entity';
+import { User } from 'src/users/domain/models/user.model';
 
 @Injectable()
 export class CreateOrderUseCaseImpl implements CreateOrderUseCase {
@@ -31,6 +31,12 @@ export class CreateOrderUseCaseImpl implements CreateOrderUseCase {
       if (!user) return this.failUserNotFound();
 
       if (orderRequest.items.length === 0) return this.failEmptyOrder();
+
+      const orderPending = await this.orderRepo.findOrderByUser(
+        orderRequest.userId,
+      );
+
+      if (orderPending) return this.failOrderPending();
 
       const { items, totalAmount } = await this.buildOrderItems(orderRequest);
 
@@ -79,6 +85,15 @@ export class CreateOrderUseCaseImpl implements CreateOrderUseCase {
     );
   }
 
+  private failOrderPending(): Result<OrderResponseDto> {
+    return Result.fail(
+      ResponseCodes.ORDER_PENDING_EXIST.code,
+      ResponseCodes.ORDER_PENDING_EXIST.message,
+      ResponseCodes.ORDER_PENDING_EXIST.httpStatus,
+      [],
+    );
+  }
+
   private failEmptyOrder(): Result<OrderResponseDto> {
     return Result.fail(
       ResponseCodes.ORDER_NO_ITEMS.code,
@@ -103,7 +118,6 @@ export class CreateOrderUseCaseImpl implements CreateOrderUseCase {
       );
       const quantity = itemDto?.quantity ?? 0;
       const subtotal = product.price * quantity;
-      console.log('SUBTOTAL', subtotal);
       totalAmount += subtotal;
 
       return new OrderItem(
@@ -115,8 +129,6 @@ export class CreateOrderUseCaseImpl implements CreateOrderUseCase {
         subtotal,
       );
     });
-
-    console.log('ITEM', items);
 
     return { items, totalAmount };
   }

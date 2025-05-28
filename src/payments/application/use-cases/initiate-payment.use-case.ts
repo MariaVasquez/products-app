@@ -115,6 +115,6 @@ export class InitiatePaymentUseCaseImpl implements InitiatePaymentUseCase {
       redirectUrl: request.wompi.redirectUrl,
     };
 
-    return await this.wompiService.initiateTransaction(wompiDto);
+    return await this.wompiService.initiateTransaction(wompiDto, reference);
   }
 }

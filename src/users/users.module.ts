@@ -7,6 +7,7 @@ import { CreateUserUseCaseImpl } from './application/use-cases/create-user.use-c
 import { ConfigModule } from '@nestjs/config';
 import { GetUserByIdUseCaseImpl } from './application/use-cases/get-user-by-id.use-case';
 import { UserController } from './interfaces/user.controller';
+import { GetUserByEmailUseCaseImpl } from './application/use-cases/get-user-by-email.use-case';
 
 @Module({
   imports: [
@@ -26,6 +27,10 @@ import { UserController } from './interfaces/user.controller';
     {
       provide: 'CreateUserUseCase',
       useClass: CreateUserUseCaseImpl,
+    },
+    {
+      provide: 'GetUserByEmailUseCase',
+      useClass: GetUserByEmailUseCaseImpl,
     },
   ],
   exports: ['UserRepository', 'CreateUserUseCase'],

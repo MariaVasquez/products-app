@@ -11,6 +11,7 @@ import { S3ImageStorageService } from './infrastructure/services/s3-image-storag
 import { ConfigModule } from '@nestjs/config';
 import { UploadProductImageUseCaseImpl } from './application/use-cases/upload-product-image.use.case';
 import { ProductController } from './controllers/product.controller';
+import { UpdateQuantityProductUseCaseImpl } from './application/use-cases/update-quantity-product.use-case';
 
 @Module({
   imports: [
@@ -32,12 +33,17 @@ import { ProductController } from './controllers/product.controller';
       provide: 'ImageStorageService',
       useClass: S3ImageStorageService,
     },
+    {
+      provide: 'UpdateQuantityProductUseCase',
+      useClass: UpdateQuantityProductUseCaseImpl,
+    },
   ],
   exports: [
     'ProductRepository',
     'CreateProductUseCase',
     'GetProductByIdUseCase',
     'GetAllProductsUseCase',
+    'UpdateQuantityProductUseCase',
   ],
 })
 export class ProductsModule {}

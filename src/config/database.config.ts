@@ -9,6 +9,7 @@ export const typeOrmConfigAsync: TypeOrmModuleAsyncOptions = {
     const username = String(configService.get('DB_USERNAME'));
     const password = String(configService.get('DB_PASSWORD'));
     const database = String(configService.get('DB_DATABASE'));
+    const sslEnabled = configService.get('DB_SSL') === 'true';
 
     return {
       type: 'postgres',
@@ -19,6 +20,7 @@ export const typeOrmConfigAsync: TypeOrmModuleAsyncOptions = {
       database,
       synchronize: true,
       autoLoadEntities: true,
+      ssl: sslEnabled ? { rejectUnauthorized: false } : false,
     };
   },
 };

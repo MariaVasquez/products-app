@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { ProductImageResponseDto } from './product-image-response.dto';
+import { ProductColorRequestDto } from './product-colors-request.dto';
 
 export class ProductResponseDto {
   @ApiProperty()
@@ -31,4 +32,7 @@ export class ProductResponseDto {
 
   @ApiProperty({ type: [ProductImageResponseDto] })
   images!: ProductImageResponseDto[];
+
+  @ApiProperty({ type: [ProductImageResponseDto] })
+  productColor?: ProductColorRequestDto;
 }

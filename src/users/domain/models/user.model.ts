@@ -1,4 +1,4 @@
-import { Address } from './adress.entity';
+import { Address } from './adress.model';
 
 export class User {
   constructor(
