@@ -27,6 +27,12 @@ export class OrdersEntity {
   status!: OrderStatus;
 
   @Column({ type: 'int' })
+  iva!: number;
+
+  @Column({ type: 'int' })
+  subtotal_amount!: number;
+
+  @Column({ type: 'int' })
   total_amount!: number;
 
   @OneToMany(() => OrderItemEntity, (item) => item.order, {

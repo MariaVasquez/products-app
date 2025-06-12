@@ -7,6 +7,8 @@ export class Order {
     public readonly id: number | null,
     public readonly userId: number,
     public status: OrderStatus,
+    public iva: number,
+    public subtotal: number,
     public totalAmount: number,
     public readonly items: OrderItem[],
     public readonly transactions: OrderTransaction[],

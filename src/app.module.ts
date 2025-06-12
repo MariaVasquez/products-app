@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfigAsync } from './config/database.config';
 import { typeOrmTestConfig } from './config/database.test.config';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { typeOrmTestConfig } from './config/database.test.config';
       ? [TypeOrmModule.forRoot(typeOrmTestConfig)]
       : [TypeOrmModule.forRootAsync(typeOrmConfigAsync)]),
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}

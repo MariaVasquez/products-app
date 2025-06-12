@@ -55,6 +55,8 @@ export class OrderQueryTypeormAdapter implements OrderQueryService {
       entity.id,
       entity.user_id,
       entity.status,
+      entity.iva,
+      entity.subtotal_amount,
       entity.total_amount,
       items,
       transactions,

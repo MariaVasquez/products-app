@@ -40,6 +40,12 @@ export class WompiHttpAdapter implements WompiGateway {
           token: dto.paymentToken,
           installments: dto.installments,
         },
+        taxes: [
+          {
+            type: 'VAT',
+            amount_in_cents: dto.amountInCentsIva,
+          },
+        ],
         reference: reference,
         redirect_url: dto.redirectUrl,
         signature: this.processSignature(dto, reference),

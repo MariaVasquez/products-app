@@ -38,16 +38,21 @@ export class CreateOrderUseCaseImpl implements CreateOrderUseCase {
 
       if (orderPending) return this.failOrderPending();
 
-      const { items, totalAmount } = await this.buildOrderItems(orderRequest);
+      const { items, subtotalAmount, totalAmount } =
+        await this.buildOrderItems(orderRequest);
 
       const order = new Order(
         null,
         user.id!,
         OrderStatus.PENDING,
+        19,
+        subtotalAmount,
         totalAmount,
         items,
         [],
       );
+
+      console.log(order);
 
       const savedOrder = await this.orderRepo.save(order);
 
@@ -57,12 +62,7 @@ export class CreateOrderUseCaseImpl implements CreateOrderUseCase {
         ResponseCodes.TRANSACTION_SUCCESS.message,
         ResponseCodes.TRANSACTION_SUCCESS.httpStatus,
       );
-    } catch (error) {
-      console.error(
-        ResponseCodes.UNEXPECTED_ERROR.message,
-        'for create order',
-        error,
-      );
+    } catch {
       return Result.fail(
         ResponseCodes.UNEXPECTED_ERROR.code,
         ResponseCodes.UNEXPECTED_ERROR.message,
@@ -105,9 +105,10 @@ export class CreateOrderUseCaseImpl implements CreateOrderUseCase {
 
   private async buildOrderItems(orderRequest: OrderRequestDto): Promise<{
     items: OrderItem[];
+    subtotalAmount: number;
     totalAmount: number;
   }> {
-    let totalAmount = 0;
+    let subtotalAmount = 0;
 
     const productIds = orderRequest.items.map((item) => item.productId);
     const products = await this.productRepo.findByIds(productIds);
@@ -118,7 +119,7 @@ export class CreateOrderUseCaseImpl implements CreateOrderUseCase {
       );
       const quantity = itemDto?.quantity ?? 0;
       const subtotal = product.price * quantity;
-      totalAmount += subtotal;
+      subtotalAmount += subtotal;
 
       return new OrderItem(
         null,
@@ -130,7 +131,11 @@ export class CreateOrderUseCaseImpl implements CreateOrderUseCase {
       );
     });
 
-    return { items, totalAmount };
+    const calculateIva = subtotalAmount * 0.19;
+
+    const totalAmount = calculateIva + subtotalAmount;
+
+    return { items, subtotalAmount, totalAmount };
   }
 
   private buildResponse(order: Order): OrderResponseDto {

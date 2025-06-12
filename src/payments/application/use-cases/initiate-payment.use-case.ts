@@ -105,10 +105,12 @@ export class InitiatePaymentUseCaseImpl implements InitiatePaymentUseCase {
     reference: string,
     order: Order,
   ): Promise<WompiResponse> {
+    const valueIva = order.subtotal * (order.iva / 100);
     const wompiDto = {
       amountInCents: order.totalAmount * 100,
       currency: 'COP',
       reference: reference,
+      amountInCentsIva: valueIva,
       customerEmail: request.wompi.customerEmail,
       paymentToken: request.wompi.paymentToken,
       installments: request.wompi.installments,

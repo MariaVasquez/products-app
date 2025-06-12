@@ -10,6 +10,9 @@ export class WompiTransactionDto {
   @IsInt()
   amountInCents!: number;
 
+  @IsInt()
+  amountInCentsIva!: number;
+
   @ApiProperty({
     example: 'COP',
     description:

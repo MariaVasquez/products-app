@@ -18,7 +18,7 @@ ENV NODE_ENV=prod
 RUN npm run build
 
 # Etapa 2: Imagen final para producción
-FROM node:18-alpine
+FROM node:20-alpine
 
 WORKDIR /app
 
@@ -29,6 +29,8 @@ COPY --from=builder /app/package*.json ./
 
 # Establecer nuevamente NODE_ENV (por si ECS no lo pasa)
 ENV NODE_ENV=prod
+
+EXPOSE 80
 
 # Comando de inicio
 CMD ["node", "dist/src/main"]

@@ -53,6 +53,8 @@ export class OrderRepositoryImpl implements OrderRepository {
       const entity = new OrdersEntity();
       entity.user_id = order.userId;
       entity.status = order.status;
+      entity.iva = order.iva;
+      entity.subtotal_amount = order.subtotal;
       entity.total_amount = order.totalAmount;
       entity.items = entityItem;
       entity.transactions = entityTransaction;
